@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo/core/utils/colors_manager.dart';
+import 'package:todo/presentation/home/add_task_bottom_sheet/add_task.dart';
 import 'package:todo/presentation/home/tabs/settings/settings_tab.dart';
 import 'package:todo/presentation/home/tabs/tasks/tasks_tab.dart';
 
@@ -28,7 +29,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   Widget buildFAB()=>FloatingActionButton(
     //shape: StadiumBorder(side:BorderSide(color: ColorsManager.white,width: 4.h) ),
-    onPressed:(){} ,
+    onPressed:(){
+      AddTaskBottomSheet.show(context);
+    } ,
     child: Icon(Icons.add),
   );
   Widget buildBottomNavBar()=>BottomAppBar(

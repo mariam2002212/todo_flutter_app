@@ -27,8 +27,20 @@ class MyAppTheme{
       shape: StadiumBorder(side:BorderSide(color: ColorsManager.white,width: 4.h)),
       backgroundColor: ColorsManager.blue,
 
+    ),
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: ColorsManager.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(12.r),topRight: Radius.circular(12.r)))),
+    iconTheme: IconThemeData(
+      color: ColorsManager.blue,
+      size: 24.sp,
+    ),
+    cardTheme: CardTheme(
+      elevation: 8.h,
+        color: ColorsManager.white,
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5.r))
     )
-
   );
   static ThemeData dark = ThemeData(
 
