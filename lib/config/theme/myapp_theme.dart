@@ -10,7 +10,9 @@ class MyAppTheme{
     scaffoldBackgroundColor: ColorsManager.grey,
     appBarTheme: AppBarTheme(
       backgroundColor: ColorsManager.blue,
-      titleTextStyle: LightTxtStyles.appBar),
+      titleTextStyle: LightTxtStyles.appBar,
+      elevation: 0,
+    ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       elevation: 0,
       backgroundColor: Colors.transparent,

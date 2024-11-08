@@ -10,6 +10,7 @@ class TaskWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: REdgeInsets.all(12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.r),
         color: Theme.of(context).colorScheme.onPrimary
