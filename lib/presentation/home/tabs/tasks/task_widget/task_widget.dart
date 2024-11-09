@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo/core/utils/colors_manager.dart';
 import 'package:todo/core/utils/text_styles.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:todo/presentation/home/tabs/tasks/edit_widget/edit_widget.dart';
 
 class TaskWidget extends StatelessWidget {
   const TaskWidget({super.key});
@@ -29,7 +30,10 @@ class TaskWidget extends StatelessWidget {
               label: 'Delete',
             ),
             SlidableAction(
-              onPressed: (context){},
+              onPressed: (context){
+                EditWidget();
+                print("enterdedit");
+              },
               backgroundColor: ColorsManager.blue,
               foregroundColor: Colors.white,
               icon: Icons.edit,
