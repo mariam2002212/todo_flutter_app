@@ -19,7 +19,7 @@ class TaskWidget extends StatelessWidget {
       child: Slidable(
         startActionPane: ActionPane(
           extentRatio: 0.4.r,
-          motion: BehindMotion(),
+          motion: const BehindMotion(),
           children: [
             SlidableAction(
               borderRadius: BorderRadius.only(topLeft: Radius.circular(15.r), bottomLeft: Radius.circular(15.r)),
@@ -31,8 +31,8 @@ class TaskWidget extends StatelessWidget {
             ),
             SlidableAction(
               onPressed: (context){
-                EditWidget();
-                print("enterdedit");
+                const EditWidget();
+                //print("enterdedit");
               },
               backgroundColor: ColorsManager.blue,
               foregroundColor: Colors.white,
@@ -70,10 +70,10 @@ class TaskWidget extends StatelessWidget {
                     Text('task description',style: LightTxtStyles.taskWidgetDescription,),
                   ],
                 ),
-                Spacer(),
+                const Spacer(),
                 InkWell(
                   onTap: (){},
-                    child: Icon(Icons.check_circle))
+                    child: const Icon(Icons.check_circle))
               ],
             ),
           ),
