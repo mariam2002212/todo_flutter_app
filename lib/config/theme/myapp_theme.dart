@@ -44,7 +44,48 @@ class MyAppTheme{
         borderRadius: BorderRadius.circular(5.r))
     )
   );
-  static ThemeData dark = ThemeData(
 
+
+  static ThemeData dark = ThemeData(
+      colorScheme: ColorScheme.fromSeed(seedColor: ColorsManager.blue,
+          primary: ColorsManager.blue,onPrimary: ColorsManager.darkBlue),
+      scaffoldBackgroundColor: ColorsManager.darkBlue,
+      appBarTheme: AppBarTheme(
+        backgroundColor: ColorsManager.blue,
+        titleTextStyle: DarkTxtStyles.appBar,
+        elevation: 0,
+      ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        elevation: 0,
+        backgroundColor: ColorsManager.darkgrey,
+        selectedItemColor: ColorsManager.blue,
+        unselectedItemColor: ColorsManager.grey,
+        type: BottomNavigationBarType.fixed,
+        selectedIconTheme: IconThemeData(size: 33),
+        unselectedIconTheme: IconThemeData(size: 33),
+      ),
+      bottomAppBarTheme: BottomAppBarTheme(
+        shape: CircularNotchedRectangle(),
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        shape: StadiumBorder(side:BorderSide(color: ColorsManager.white,width: 4.h)),
+        backgroundColor: ColorsManager.blue,
+
+      ),
+      bottomSheetTheme: BottomSheetThemeData(
+          backgroundColor: ColorsManager.darkgrey,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(12.r),topRight: Radius.circular(12.r)))),
+      iconTheme: IconThemeData(
+        color: ColorsManager.blue,
+        size: 24.sp,
+      ),
+      cardTheme: CardTheme(
+          elevation: 8.h,
+          color: ColorsManager.darkgrey,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5.r))
+      ),
+      dialogBackgroundColor: ColorsManager.darkgrey,
+      dialogTheme: DialogTheme(titleTextStyle: DarkTxtStyles.selectedCalenderText,contentTextStyle: DarkTxtStyles.selectedCalenderText)
   );
 }

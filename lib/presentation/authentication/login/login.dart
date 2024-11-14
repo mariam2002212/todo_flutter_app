@@ -1,9 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo/core/utils/assets_manager.dart';
 import 'package:todo/core/utils/constants_manager.dart';
+import 'package:todo/core/utils/dialogs/dialogs.dart';
+import 'package:todo/core/utils/routes_manager.dart';
+import 'package:todo/core/utils/strings_manager.dart';
 import 'package:todo/core/utils/text_styles.dart';
+import 'package:todo/core/utils/validate_email.dart';
+import 'package:todo/database_manager/model/user_data_model.dart';
 import '../widgets/customed_text_field.dart';
 
 class Login extends StatefulWidget {
@@ -73,10 +80,10 @@ class _LoginState extends State<Login> {
                     if (input == null || input.trim().isEmpty) {
                       return 'Plz, enter emil';
                     }
-                    // if (!isValidEmail(input)) {
-                    //   // email is not Valid
-                    //   return 'Email bad format';
-                    // }
+                    if (!isValidEmail(input)) {
+                      // email is not Valid
+                      return 'Email bad format';
+                    }
                     return null;
                   },
                   controller: emailController,
@@ -116,7 +123,7 @@ class _LoginState extends State<Login> {
                             borderRadius: BorderRadius.circular(15.r)),
                         padding: REdgeInsets.symmetric(vertical: 11)),
                     onPressed: () {
-                      //login();
+                      login();
                     },
                     child: Text(
                       'Sign-In',
@@ -130,69 +137,69 @@ class _LoginState extends State<Login> {
     );
   }
 
-//   void login() async {
-//     if (formKey.currentState?.validate() == false) return;
-//
-//     try {
-//       // show Loading
-//       MyDialog.showLoading(context,
-//           loadingMessage: 'Waiting...', isDismissible: false);
-//       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-//         email: emailController.text,
-//         password: passwordController.text,
-//       );
-//       UserDM.currentUser = await readUserFromFireStore(credential.user!.uid);
-//
-//       //hide loading
-//       if (mounted) {
-//         MyDialog.hide(context);
-//       }
-//       // show success message
-//       if (mounted) {
-//         MyDialog.showMessage(context,
-//             body: 'User Logged in successfully',
-//             posActionTitle: 'Ok', posAction: () {
-//               Navigator.pushReplacementNamed(
-//                 context,
-//                 RoutesManager.home,
-//               );
-//             });
-//       }
-//     } on FirebaseAuthException catch (authError) {
-//       if (mounted) {
-//         MyDialog.hide(context);
-//       }
-//       late String message;
-//       if (authError.code == ConstantManager.invalidCredential) {
-//         message = StringsManager.wrongEmailOrPasswordMessage;
-//       }
-//       if (mounted) {
-//         MyDialog.showMessage(
-//           context,
-//           title: 'Error',
-//           body: message,
-//           posActionTitle: 'OK',
-//         );
-//       }
-//     } catch (error) {
-//       if (mounted) {
-//         MyDialog.hide(context);
-//         MyDialog.showMessage(context,
-//             title: 'Error',
-//             body: error.toString(),
-//             posActionTitle: 'Try again');
-//       }
-//     }
-//   }
-//
-//   Future<UserDM> readUserFromFireStore(String uid) async {
-//     CollectionReference usersCollection =
-//     FirebaseFirestore.instance.collection(UserDM.collectionName);
-//     DocumentReference userDocument = usersCollection.doc(uid);
-//     DocumentSnapshot userDocumentSnapshot = await userDocument.get();
-//     Map<String, dynamic> json =
-//     userDocumentSnapshot.data() as Map<String, dynamic>;
-//     UserDM userDM = UserDM.fromFireStore(json);
-//     return userDM;
-//   }
+  void login() async {
+    if (formKey.currentState?.validate() == false) return;
+
+    try {
+      // show Loading
+      MyDialog.showLoading(context,
+          loadingMessage: 'Waiting...', isDismissible: false);
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      UserDM.currentUser = await readUserFromFireStore(credential.user!.uid);
+
+      //hide loading
+      if (mounted) {
+        MyDialog.hide(context);
+      }
+      // show success message
+      if (mounted) {
+        MyDialog.showMessage(context,
+            body: 'User Logged in successfully',
+            posActionTitle: 'Ok', posAction: () {
+              Navigator.pushReplacementNamed(
+                context,
+                RoutesManager.homeRoute,
+              );
+            });
+      }
+    } on FirebaseAuthException catch (authError) {
+      if (mounted) {
+        MyDialog.hide(context);
+      }
+      late String message;
+      if (authError.code == ConstantManager.invalidCredential) {
+        message = StringsManager.wrongEmailOrPasswordMessage;
+      }
+      if (mounted) {
+        MyDialog.showMessage(
+          context,
+          title: 'Error',
+          body: message,
+          posActionTitle: 'OK',
+        );
+      }
+    } catch (error) {
+      if (mounted) {
+        MyDialog.hide(context);
+        MyDialog.showMessage(context,
+            title: 'Error',
+            body: error.toString(),
+            posActionTitle: 'Try again');
+      }
+    }
+  }
+
+  Future<UserDM> readUserFromFireStore(String uid) async {
+    CollectionReference usersCollection =
+    FirebaseFirestore.instance.collection(UserDM.collectionName);
+    DocumentReference userDocument = usersCollection.doc(uid);
+    DocumentSnapshot userDocumentSnapshot = await userDocument.get();
+    Map<String, dynamic> json =
+    userDocumentSnapshot.data() as Map<String, dynamic>;
+    UserDM userDM = UserDM.fromFireStore(json);
+    return userDM;
+  }
  }

@@ -8,6 +8,7 @@ class ColorsManager{
   static const Color black = Color(0xFF303030);
   static const Color blackAccent=Color(0xFF383838);
   static const Color greyAccent=Color(0xFFA9A9A9);
-
+  static const Color darkBlue =Color(0xFF060E1E);
+  static const Color darkgrey = Color(0xFF141922);
 
 }
