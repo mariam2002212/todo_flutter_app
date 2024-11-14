@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:todo/presentation/authentication/login/login.dart';
 import 'package:todo/presentation/authentication/register/register.dart';
 import 'package:todo/presentation/home/home_screen.dart';
+import 'package:todo/presentation/splash/splash_screen.dart';
 
 class RoutesManager{
   static const String homeRoute = '/home';
   static const String register = '/register';
   static const String login = '/login';
+  static const String splash = '/splash';
 
   //function that returns route object and takes param of routesettings
   static Route? router(RouteSettings settings){
@@ -23,6 +25,10 @@ class RoutesManager{
       case login:
         return MaterialPageRoute(
           builder: (context) => const Login(),
+        );
+      case splash:
+        return MaterialPageRoute(
+          builder: (context) => const SplashScreen(),
         );
     }
   }

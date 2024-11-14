@@ -14,7 +14,25 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
-  List<Widget> tabs=[TasksTab(),SettingsTab()];
+  GlobalKey<TasksTabState> tasksTabKey = GlobalKey();
+
+  // The current theme mode
+  ThemeMode _themeMode = ThemeMode.light;
+
+  List<Widget> tabs = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    tabs = [
+      TasksTab(key: tasksTabKey),
+      SettingsTab(switchTheme: (newTheme) {
+                  setState(() {
+                   _themeMode = newTheme;});})
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,8 +47,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   Widget buildFAB()=>FloatingActionButton(
     //shape: StadiumBorder(side:BorderSide(color: ColorsManager.white,width: 4.h) ),
-    onPressed:(){
-      AddTaskBottomSheet.show(context);
+    onPressed:()async{
+      await AddTaskBottomSheet.show(context);
+      //ro7 hat el taskat awel m elbottomsheet y2fl
+      tasksTabKey.currentState?.getTodosFromFireStore();
+
     } ,
     child: Icon(Icons.add),
   );
